@@ -3,9 +3,10 @@ It's an app that calculates the value of a mathematical expression and views the
 Example:
 input:
 2+5+11*(20*15*14)+20*2*(3+5+2)
-output:
- = 46607
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+)                       
+output:<br>
+ = 46607<br>
+ <pre>
+                 (+)                       
 |                / \                       
 |               /   \                      
 |              /     \                     
@@ -29,4 +30,5 @@ output:
 |            20   (*)        /   \         
 |                 / \       3     5        
 |                /   \                     
-|               15    14               
+|               15    14         
+</pre>
