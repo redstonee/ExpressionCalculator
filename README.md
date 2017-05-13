@@ -4,8 +4,8 @@ Example:
 input:
 2+5+11*(20*15*14)+20*2*(3+5+2)
 output:<br>
- = 46607<br>
- <pre style="background: white!">
+ <pre>
+ = 46607
                  (+)                       
                  / \                       
                 /   \                      
