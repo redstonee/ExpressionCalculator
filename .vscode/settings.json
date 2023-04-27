@@ -11,6 +11,11 @@
         "sstream": "cpp",
         "streambuf": "cpp",
         "system_error": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "iostream": "cpp",
+        "numeric": "cpp"
     }
 }

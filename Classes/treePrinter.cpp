@@ -1,4 +1,3 @@
-#pragma once
 #include "treeNode.h"
 #include "treePrinter.h"
 #include <sstream>
@@ -6,6 +5,13 @@
 #include <vector>
 
 using namespace std;
+
+constexpr int TreePrinter::border;
+constexpr int TreePrinter::NOTHING;
+constexpr int TreePrinter::LOWEST_PARENT;
+constexpr int TreePrinter::LEFT;
+constexpr int TreePrinter::RIGHT;
+constexpr int TreePrinter::BOTH;
 
 void floatToString(float f, char *buffer)
 {
