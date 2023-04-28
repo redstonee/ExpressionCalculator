@@ -1,5 +1,5 @@
-#include "treeNode.h"
-#include "treePrinter.h"
+#include "TreeNode.h"
+#include "TreePrinter.h"
 #include <sstream>
 #include <string>
 #include <vector>

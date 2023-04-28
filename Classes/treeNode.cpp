@@ -1,6 +1,5 @@
-#pragma once
 #include <cmath>
-#include "treeNode.h"
+#include "TreeNode.h"
 
 TreeNode::TreeNode()
 {
@@ -10,21 +9,21 @@ TreeNode::TreeNode()
 	this->right = nullptr;
 }
 
-double TreeNode::eval()
+double TreeNode::evaluate()
 {
 	switch (this->op)
 	{
 	case '+':
-		return this->left->eval() + this->right->eval();
+		return this->left->evaluate() + this->right->evaluate();
 	case '-':
-		return this->left->eval() - this->right->eval();
+		return this->left->evaluate() - this->right->evaluate();
 	case '/':
-		return this->left->eval() / this->right->eval();
+		return this->left->evaluate() / this->right->evaluate();
 	case '*':
-		return this->left->eval() * this->right->eval();
+		return this->left->evaluate() * this->right->evaluate();
 	case '^':
-		return pow(this->left->eval(), this->right->eval());
-	case 'x':
+		return pow(this->left->evaluate(), this->right->evaluate());
+	default:
 		return this->val;
 	}
 }

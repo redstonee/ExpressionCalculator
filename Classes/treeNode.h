@@ -7,5 +7,5 @@ public:
     char op;
     TreeNode *left, *right;
 
-    double eval();
+    double evaluate();
 };

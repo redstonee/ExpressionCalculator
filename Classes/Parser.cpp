@@ -1,21 +1,20 @@
-#include "calculator.h"
-#include "treePrinter.h"
+#include "Parser.h"
+#include "TreePrinter.h"
 
 using namespace std;
 
-Parser::Parser(string line)
-{
-	stream = new istringstream(line);
-}
+istringstream Parser::stream;
+TreeNode *Parser::head;
 
 bool Parser::isSign(char ch)
 {
 	return ch == '-' || ch == '+' || ch == '*' || ch == '/';
 }
 
-TreeNode *Parser::parse()
+TreeNode *Parser::parse(string s)
 {
-	while (!stream->eof() && stream->peek() != -1)
+	stream = istringstream(s);
+	while (!stream.eof() && stream.peek() != -1)
 	{
 		head = term(head);
 	}
@@ -28,30 +27,30 @@ TreeNode *Parser::paranthesis(TreeNode *localHead = nullptr)
 	do
 	{
 		localHead = term(localHead);
-		if (stream->eof())
-			throw "You didn't close the paranthesis";
-		ch = stream->peek();
+		if (stream.eof())
+			throw FuckException("You didn't close the paranthesis");
+		ch = stream.peek();
 	} while (ch != ')');
-	*stream >> ch;
+	stream >> ch;
 	return localHead;
 }
 
 TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 {
 
-	if (stream->eof() || stream->peek() == -1)
+	if (stream.eof() || stream.peek() == -1)
 		return leftNode;
-		
+
 	char ch;
 	do
 	{
-		*stream >> ch;
+		stream >> ch;
 	} while (ch == ' ');
 	TreeNode *node = nullptr;
 	if (ch >= '0' && ch <= '9')
 	{
-		stream->putback(ch);
-		node = number();
+		stream.putback(ch);
+		node = newNumberNode();
 		return expression(node);
 	}
 	else
@@ -59,14 +58,14 @@ TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 		switch (ch)
 		{
 		case ')':
-			stream->putback(ch);
+			stream.putback(ch);
 			return leftNode;
 		case '(':
 			return paranthesis();
 		case '+':
 		case '-':
 		{
-			stream->putback(ch);
+			stream.putback(ch);
 			return leftNode;
 		}
 		case '^':
@@ -76,7 +75,7 @@ TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 		{
 			if (!leftNode)
 			{
-				throw "Left node is null in division or multiplication";
+				throw FuckException("Left node is null in division or multiplication");
 			}
 			node = new TreeNode;
 			node->op = ch;
@@ -86,9 +85,8 @@ TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 		}
 		default:
 		{
-			char a[] = "Unknown character:  ";
-			a[sizeof(a) - 2] = ch;
-			throw a;
+			string e = "Unknown character: " ;
+			throw FuckException(e);
 		}
 		}
 	}
@@ -99,28 +97,28 @@ TreeNode *Parser::power(TreeNode *leftNode)
 	TreeNode *node = new TreeNode;
 	node->op = '^';
 	node->left = leftNode;
-	if (stream->peek() == '(')
+	if (stream.peek() == '(')
 	{
-		stream->ignore(1);
+		stream.ignore(1);
 		node->right = paranthesis();
 	}
-	else if (isdigit(stream->peek()))
-		node->right = number();
+	else if (isdigit(stream.peek()))
+		node->right = newNumberNode();
 	else
-		throw "'(' or number expected after '^'";
+		throw FuckException("'(' or newNumberNode expected after '^'");
 	return node;
 }
 
 TreeNode *Parser::term(TreeNode *leftNode = nullptr)
 {
 	char ch;
-	*stream >> ch;
+	stream >> ch;
 	if (ch == '+' || ch == '-')
 	{
 		char sign = ch;
 		if (!leftNode)
 		{
-			ch = stream->peek();
+			ch = stream.peek();
 			if ((isdigit(ch) || ch == '(') && sign == '-')
 			{
 				TreeNode *head = new TreeNode;
@@ -142,29 +140,13 @@ TreeNode *Parser::term(TreeNode *leftNode = nullptr)
 	}
 	else
 	{
-		stream->putback(ch);
+		stream.putback(ch);
 		return expression(leftNode);
 	}
 }
-TreeNode *Parser::number()
+TreeNode *Parser::newNumberNode()
 {
 	TreeNode *node = new TreeNode;
-	*stream >> node->val;
+	stream >> node->val;
 	return node;
-}
-
-void print(TreeNode *head)
-{
-	if (head == nullptr)
-		return;
-	if (head->op != 'x')
-		cout << "(";
-	print(head->left);
-	if (head->op == 'x')
-		cout << head->val;
-	else
-		cout << head->op;
-	print(head->right);
-	if (head->op != 'x')
-		cout << ')';
 }

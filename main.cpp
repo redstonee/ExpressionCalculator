@@ -1,5 +1,5 @@
-#include "calculator.h"
-#include "treePrinter.h"
+#include "Parser.h"
+#include "TreePrinter.h"
 #include <iostream>
 #include <string>
 
@@ -12,17 +12,16 @@ int main()
 		string str;
 		cout << "Enter expression>> ";
 		cin >> str;
-		Parser parser{str};
 		try
 		{
-			TreeNode *node = parser.parse();
-			cout << str << " = " << node->eval() << endl;
-			// print(node);
+			TreeNode *node = Parser::parse(str);
+			cout << str << " = " << node->evaluate() << endl;
 			TreePrinter x;
 			cout << "\n";
 			x.printTree(node);
+			delete(node);
 		}
-		catch (exception e)
+		catch (exception &e)
 		{
 			cout << "ERROR: " << e.what();
 		}

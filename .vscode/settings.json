@@ -16,6 +16,8 @@
         "algorithm": "cpp",
         "random": "cpp",
         "iostream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "exception": "cpp",
+        "optional": "cpp"
     }
 }

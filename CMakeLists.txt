@@ -7,4 +7,4 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(Classes)
 
-add_executable(Calc main.cpp Classes/calculator.cpp Classes/treeNode.cpp Classes/treePrinter.cpp)
+add_executable(Calc main.cpp Classes/Parser.cpp Classes/TreeNode.cpp Classes/TreePrinter.cpp)
