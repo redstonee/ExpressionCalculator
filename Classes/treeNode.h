@@ -3,7 +3,7 @@ class TreeNode
 {
 public:
     TreeNode();
-    long double val;
+    double val;
     char op;
     TreeNode *left, *right;
 

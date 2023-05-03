@@ -2,7 +2,6 @@
 #include "TreePrinter.h"
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 int main()
@@ -16,9 +15,9 @@ int main()
 		{
 			TreeNode *node = Parser::parse(str);
 			cout << str << " = " << node->evaluate() << endl;
-			TreePrinter x;
+			TreePrinter tp;
 			cout << "\n";
-			x.printTree(node);
+			tp.printTree(node);
 			delete(node);
 		}
 		catch (exception &e)

@@ -10,7 +10,6 @@ using namespace std;
 namespace Parser
 {
     extern istringstream stream;
-    extern TreeNode *head;
 
     bool isSign(char ch);
     TreeNode *parse(string s);

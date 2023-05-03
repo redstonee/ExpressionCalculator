@@ -18,6 +18,7 @@
         "iostream": "cpp",
         "numeric": "cpp",
         "exception": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "cstdlib": "cpp"
     }
 }

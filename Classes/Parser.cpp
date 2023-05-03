@@ -4,7 +4,6 @@
 using namespace std;
 
 istringstream Parser::stream;
-TreeNode *Parser::head;
 
 bool Parser::isSign(char ch)
 {
@@ -13,8 +12,9 @@ bool Parser::isSign(char ch)
 
 TreeNode *Parser::parse(string s)
 {
+	TreeNode *head = nullptr;
 	stream = istringstream(s);
-	while (!stream.eof() && stream.peek() != -1)
+	while (stream.peek() != -1)
 	{
 		head = term(head);
 	}
@@ -73,10 +73,6 @@ TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 		case '*':
 		case '/':
 		{
-			if (!leftNode)
-			{
-				throw FuckException("Left node is null in division or multiplication");
-			}
 			node = new TreeNode;
 			node->op = ch;
 			node->left = leftNode;
@@ -85,7 +81,7 @@ TreeNode *Parser::expression(TreeNode *leftNode = nullptr)
 		}
 		default:
 		{
-			string e = "Unknown character: " ;
+			string e = "Unknown character: ";
 			throw FuckException(e);
 		}
 		}
